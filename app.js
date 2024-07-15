@@ -8,8 +8,10 @@ const fs = require('fs');
 const app = express();
 const helmet = require('helmet');
 
-// 環境変数からAPIのURLを取得
+// server.js内で環境変数を取得
 const apiUrl = process.env.API_URL;
+const PORT = process.env.PORT || 3002;
+
 
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -29,7 +31,6 @@ app.get('/quote', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {
   console.log(`Server is running → http://localhost:${PORT}`);
 });
