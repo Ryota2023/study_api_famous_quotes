@@ -1,6 +1,4 @@
 # study_api_famous_quotes
-
-
 ### 作成日
 2024/7/10～7/16
 ### 内容
