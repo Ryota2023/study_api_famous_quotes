@@ -1,4 +1,4 @@
-// dotenvパッケージを最初に読み込む(GPT推奨)
+// dotenvパッケージは最初に読み込む(GPT推奨)
 // dotenvパッケージは、.envファイルの内容を読み込みます。
 require('dotenv').config();
 
@@ -7,7 +7,8 @@ const fetch = require('node-fetch');
 const path = require('path');
 const fs = require('fs');
 const app = express();
-const helmet = require('helmet');
+const morgan = require('morgan');
+const helmet = require('helmet');  //セキュリティヘッダーを設定する
 
 // server.js内で環境変数を取得
 const apiUrl = process.env.API_URL;
@@ -18,12 +19,23 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 開発環境と本番環境の切り替え
 if (NODE_ENV === 'development') {
-  console.log('*** Running in development mode ***');
-  // 開発環境特有の設定やミドルウェアをここに追加
+    // 開発環境特有の設定やミドルウェアをここに追加
+    app.use(morgan('dev'));
+    console.log('*** Running in development mode ***');
+    app.use((err, req, res, next) => {
+        console.error(err.stack);
+        res.status(500).send('Something broke!');
+    });
 } else if (NODE_ENV === 'production') {
-  console.log('*** Running in production mode ***');
-  // 本番環境特有の設定やミドルウェアをここに追加
+    // 本番環境特有の設定やミドルウェアをここに追加
+    app.use(morgan('combined'));
+    app.use(helmet());  //本番環境ではセキュリティーヘッダーを使う
+    console.log('*** Running in production mode ***');
+    app.use((err, req, res, next) => {
+        res.status(500).send('An error occurred. Please try again later.');
+    });
 }
 
 app.get('/quote', async (req, res) => {
