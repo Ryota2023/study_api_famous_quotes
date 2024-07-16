@@ -4,7 +4,8 @@
   "description": "A project to study API famous quotes",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,8 @@
     "express": "^4.19.2",
     "helmet": "^7.1.0",
     "morgan": "^1.10.0",
-    "node-fetch": "^2.7.0"
+    "node-fetch": "^2.7.0",
+    "mocha": "^8.2.1",
+    "chai": "^4.2.0"
   }
 }
