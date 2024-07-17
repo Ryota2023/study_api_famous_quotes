@@ -37,9 +37,14 @@ if (NODE_ENV === 'development') {
     app.use(morgan('combined'));
     app.use(helmet());  //本番環境ではセキュリティーヘッダーを使う
  
-    app.get('/study_api_famous_quotes', (req, res) => {
-      res.sendFile(__dirname + './public/index.html');
+    app.get('/', (req, res) => {
+      res.sendFile(__dirname + '/public/index.html');
       });
+
+    app.get('/study_api_famous_quotes/about', (req, res) => {
+      res.sendFile(__dirname + '/public/about.html');
+      });
+
     app.use((err, req, res, next) => {
         res.status(500).send('An error occurred. Please try again later.');
     });
