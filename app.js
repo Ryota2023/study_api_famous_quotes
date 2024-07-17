@@ -1,6 +1,6 @@
+require('dotenv').config();
 // dotenvパッケージは最初に読み込む(GPT推奨)
 // dotenvパッケージは、.envファイルの内容を読み込む
-require('dotenv').config();
 
 const express = require('express');
 const fetch = require('node-fetch');
