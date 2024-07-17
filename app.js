@@ -38,6 +38,10 @@ if (NODE_ENV === 'development') {
     });
 }
 
+app.get('/study_api_famous_quotes', (req, res) => {
+  res.send('This is the famous quotes API');
+  });
+
 app.get('/quote', async (req, res) => {
   try {
       const response = await fetch(apiUrl);
