@@ -1,5 +1,5 @@
 // dotenvパッケージは最初に読み込む(GPT推奨)
-// dotenvパッケージは、.envファイルの内容を読み込みます。
+// dotenvパッケージは、.envファイルの内容を読み込む
 require('dotenv').config();
 
 const express = require('express');
@@ -15,7 +15,6 @@ const apiUrl = process.env.API_URL;
 const PORT = process.env.PORT || 3002; // PORT環境変数が存在しない場合はデフォルト値を使用
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
-
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -24,6 +23,11 @@ if (NODE_ENV === 'development') {
     // 開発環境特有の設定やミドルウェアをここに追加
     app.use(morgan('dev'));
     console.log('*** Running in development mode ***');
+
+    app.get('/about', (req, res) => {
+      res.sendFile(__dirname + '/public/about.html');
+      });
+
     app.use((err, req, res, next) => {
         console.error(err.stack);
         res.status(500).send('Something broke!');
@@ -32,15 +36,15 @@ if (NODE_ENV === 'development') {
     // 本番環境特有の設定やミドルウェアをここに追加
     app.use(morgan('combined'));
     app.use(helmet());  //本番環境ではセキュリティーヘッダーを使う
-    console.log('*** Running in production mode ***');
+ 
+    app.get('/study_api_famous_quotes', (req, res) => {
+      res.sendFile(__dirname + './public/index.html');
+      });
     app.use((err, req, res, next) => {
         res.status(500).send('An error occurred. Please try again later.');
     });
 }
 
-app.get('/study_api_famous_quotes', (req, res) => {
-  res.send('This is the famous quotes API');
-  });
 
 app.get('/quote', async (req, res) => {
   try {
