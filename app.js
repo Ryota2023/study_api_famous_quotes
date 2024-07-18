@@ -1,6 +1,6 @@
-require('dotenv').config();
-// dotenvパッケージは最初に読み込む(GPT推奨)
-// dotenvパッケージは、.envファイルの内容を読み込む
+require('dotenv').config();  
+// .envファイルに環境変数を設定するために使う
+// dotenvパッケージ必ず一番最初に書く
 
 const express = require('express');
 const fetch = require('node-fetch');
@@ -10,7 +10,7 @@ const app = express();
 const morgan = require('morgan');
 const helmet = require('helmet');  //セキュリティヘッダーを設定する
 
-// server.js内で環境変数を取得
+// process.envを通じて.envから環境変数を取得
 const apiUrl = process.env.API_URL;
 const PORT = process.env.PORT || 3002; // PORT環境変数が存在しない場合はデフォルト値を使用
 const NODE_ENV = process.env.NODE_ENV || 'development';
