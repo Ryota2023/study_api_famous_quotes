@@ -43,7 +43,7 @@ if (NODE_ENV === 'development') {
     app.use(helmet());  //本番環境ではセキュリティーヘッダーを使う
  
     app.get('/study_api_famous_quotes', (req, res) => {
-      res.sendFile(path.join(__dirname, 'public/index.html'), (err) => {
+      res.sendFile(path.join(__dirname, 'public', 'index.html'), (err) => {
           if (err) {
               res.status(err.status || 500).send('An error occurred while loading the file.');
           }
@@ -51,7 +51,7 @@ if (NODE_ENV === 'development') {
     });
 
     app.get('/study_api_famous_quotes/about', (req, res) => {
-        res.sendFile(path.join(__dirname, 'public/about.html'), (err) => {
+        res.sendFile(path.join(__dirname, 'public', 'about.html'), (err) => {
             if (err) {
                 res.status(err.status || 500).send('An error occurred while loading the file.');
             }
