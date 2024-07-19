@@ -12,7 +12,7 @@ const helmet = require('helmet');  //セキュリティヘッダーを設定す�
 
 // process.envを通じて.envから環境変数を取得
 const apiUrl = process.env.API_URL;
-const PORT = process.env.PORT || 3002; // PORT環境変数が存在しない場合はデフォルト値を使用
+const PORT = process.env.PORT || 3100; // PORT環境変数が存在しない場合はデフォルト値を使用
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 app.use(helmet());
@@ -43,7 +43,7 @@ if (NODE_ENV === 'development') {
     app.use(helmet());  //本番環境ではセキュリティーヘッダーを使う
  
     app.get('/study_api_famous_quotes', (req, res) => {
-      res.sendFile(path.join(__dirname, 'public', 'index.html'), (err) => {
+      res.sendFile(path.join(__dirname, 'public/index.html'), (err) => {
           if (err) {
               res.status(err.status || 500).send('An error occurred while loading the file.');
           }
