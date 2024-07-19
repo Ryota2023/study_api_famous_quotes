@@ -14,6 +14,8 @@ const helmet = require('helmet');  //セキュリティヘッダーを設定す�
 const apiUrl = process.env.API_URL;
 const PORT = process.env.PORT || 3100; // PORT環境変数が存在しない場合はデフォルト値を使用
 const NODE_ENV = process.env.NODE_ENV || 'development';
+console.log(`PORT: ${PORT}`);
+console.log(`NODE_ENV: ${NODE_ENV}`);
 
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
