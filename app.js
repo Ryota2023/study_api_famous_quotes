@@ -18,38 +18,50 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 開発環境と本番環境の切り替え
+
 if (NODE_ENV === 'development') {
-    // 開発環境特有の設定やミドルウェアをここに追加
+    // 開発環境用
     app.use(morgan('dev'));
     console.log('*** Running in development mode ***');
 
     app.get('/about', (req, res) => {
-      res.sendFile(__dirname + '/public/about.html');
-      });
+        res.sendFile(path.join(__dirname, '/public', 'about.html'), (err)=> {
+            if(err){
+                res.status(err.status || 500).end();
+            }
+        });
+    });
 
     app.use((err, req, res, next) => {
         console.error(err.stack);
         res.status(500).send('Something broke!');
     });
+
 } else if (NODE_ENV === 'production') {
-    // 本番環境特有の設定やミドルウェアをここに追加
+    // 本番環境用
     app.use(morgan('combined'));
     app.use(helmet());  //本番環境ではセキュリティーヘッダーを使う
  
     app.get('/study_api_famous_quotes', (req, res) => {
-      res.sendFile(__dirname + '/public/index.html');
+      res.sendFile(path.join(__dirname, 'public/index.html'), (err) => {
+          if (err) {
+              res.status(err.status || 500).send('An error occurred while loading the file.');
+          }
       });
+    });
 
     app.get('/study_api_famous_quotes/about', (req, res) => {
-      res.sendFile(__dirname + '/public/about.html');
-      });
+        res.sendFile(path.join(__dirname, 'public/about.html'), (err) => {
+            if (err) {
+                res.status(err.status || 500).send('An error occurred while loading the file.');
+            }
+        });
+    });
 
     app.use((err, req, res, next) => {
         res.status(500).send('An error occurred. Please try again later.');
     });
 }
-
 
 app.get('/quote', async (req, res) => {
   try {
@@ -64,6 +76,11 @@ app.get('/quote', async (req, res) => {
       console.error('Error fetching the author:', error);
       res.status(500).json({ error: 'Failed to fetch quote' });
   }
+});
+
+// 404エラーハンドリングミドルウェア
+app.use((req, res, next) => {
+  res.status(404).send(`404 not found`);
 });
 
 app.listen(PORT, () => {
