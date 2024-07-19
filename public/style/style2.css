@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+body { 
+  margin: 0 ; /* headerの固定位置を考慮してmarginをリセット */
+  font-family: Arial, sans-serif;
+  background-color: rgba(238, 239, 225, 0.526);
+}
+
+header {
+  margin: 0;
+  /* position: fixed; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background-color: rgb(122, 193, 240);
+  padding: 10px 0;
+  text-align: center;
+}
+
+.header-container {
+  margin: 24px;
+  font-size: 24px;
+  font-weight: bold;
+  color:cadetblue;
+}
+
+main {
+  margin:20px 20px;
+  
+}
+
+.main-date {
+  text-align: right;
+}
+
+h1 {
+  margin:0 auto;
+}
+
+/* 画面幅が700px以下のときのスタイル */
+@media (max-width: 700px) {
+  .header {
+    font-size: 0.8em; /* フォントサイズを小さくする */
+  }
+}
+
+@media (max-width: 500px) {
+  .header {
+    font-size: 0.6em; /* さらに小さくする */
+  }
+}
+
+@media (max-width: 300px) {
+  .header {
+    font-size: 0.4em; /* さらに小さくする */
+  }
+}
