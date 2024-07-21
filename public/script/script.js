@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	  fetch('https://xs278795.xsrv.jp/study_api_famous_quotes/quote')
 		.then(response => {
 		  if (response.ok) {
+                        console.table(response);
 			return response.json();
 		  }
 		  throw new Error(`Network response was not ok: ${response.statusText}`);
