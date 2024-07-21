@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		clickSound.play();
 	  }
 	
-	  fetch('/quote')
+	  fetch('https://xs278795.xsrv.jp/study_api_famous_quotes/quote')
 		.then(response => {
 		  if (response.ok) {
 			return response.json();
@@ -56,4 +56,3 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 	});
   });
-  

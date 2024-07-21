@@ -18,7 +18,7 @@ console.log(`PORT: ${PORT}`);
 console.log(`NODE_ENV: ${NODE_ENV}`);
 
 app.use(helmet());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/study_api_famous_quotes', express.static(path.join(__dirname, 'public')));
 
 
 if (NODE_ENV === 'development') {
@@ -79,6 +79,7 @@ app.get('/quote', async (req, res) => {
       res.status(500).json({ error: 'Failed to fetch quote' });
   }
 });
+
 
 // 404エラーハンドリングミドルウェア
 app.use((req, res, next) => {
