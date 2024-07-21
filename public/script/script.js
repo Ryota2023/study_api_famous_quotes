@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	  fetch('/quote')
 		.then(response => {
 		  if (response.ok) {
+			console.table(response);  //デバッグ用
 			return response.json();
 		  }
 		  throw new Error(`Network response was not ok: ${response.statusText}`);
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		  dsp2E.scrollIntoView({ behavior: 'smooth' });
 		})
 		.catch(error => {
-		  console.error('Error fetching the quote:', error);
+		  console.error('エラー発生: fetching the quote:', error);
 		  document.getElementById('quoteDisplay').innerText = 'Failed to fetch quote.';
 		});
 	});

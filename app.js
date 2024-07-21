@@ -17,6 +17,7 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 console.log(`PORT: ${PORT}`);
 console.log(`NODE_ENV: ${NODE_ENV}`);
 
+app.use(express.json());
 app.use(helmet());
 
 if (NODE_ENV === 'development') {
@@ -66,19 +67,22 @@ if (NODE_ENV === 'development') {
 }
 
 app.get('/quote', async (req, res) => {
-  try {
-      const response = await fetch(apiUrl);
-      if (!response.ok) {
-          throw new Error(`Network response was not ok: ${response.statusText}`);
-      }
-      const data = await response.json();
-      const randomQuote = data[Math.floor(Math.random() * data.length)];
-      res.json(randomQuote);
-  } catch (error) {
-      console.error('Error fetching the author:', error);
-      res.status(500).json({ error: 'Failed to fetch quote' });
-  }
+    console.log('quote in!');   //デバック用
+    res.send('Hello world');
 });
+//   try {
+//       const response = await fetch(apiUrl);
+//       if (!response.ok) {
+//           throw new Error(`Network response was not ok: ${response.statusText}`);
+//       }
+//       const data = await response.json();
+//       const randomQuote = data[Math.floor(Math.random() * data.length)];
+//       res.json(randomQuote);
+//   } catch (error) {
+//       console.error('Error fetching the author:', error);
+//       res.status(500).json({ error: 'Failed to fetch quote' });
+//   }
+// });
 
 // 404エラーハンドリングミドルウェア
 app.use((req, res, next) => {
