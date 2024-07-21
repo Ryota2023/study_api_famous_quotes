@@ -18,11 +18,10 @@ console.log(`PORT: ${PORT}`);
 console.log(`NODE_ENV: ${NODE_ENV}`);
 
 app.use(helmet());
-app.use(express.static(path.join(__dirname, 'public')));
-
 
 if (NODE_ENV === 'development') {
     // 開発環境用
+    app.use(express.static(path.join(__dirname, 'public')));
     app.use(morgan('dev'));
     console.log('*** Running in development mode ***');
 
@@ -41,6 +40,7 @@ if (NODE_ENV === 'development') {
 
 } else if (NODE_ENV === 'production') {
     // 本番環境用
+    app.use('/study_api_famous_quotes', express.static(path.join(__dirname, 'public')));
     app.use(morgan('combined'));
     app.use(helmet());  //本番環境ではセキュリティーヘッダーを使う
  
