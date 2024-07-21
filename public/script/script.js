@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		clickSound.play();
 	  }
 	
+	//   fetch('https://xs278795.xsrv.jp/study_api_famous_quotes/quote')
 	  fetch('/quote')
 		.then(response => {
 		  if (response.ok) {

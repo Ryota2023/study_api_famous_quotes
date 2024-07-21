@@ -68,21 +68,21 @@ if (NODE_ENV === 'development') {
 
 app.get('/quote', async (req, res) => {
     console.log('quote in!');   //デバック用
-    res.send('Hello world');
+    // res.send('Hello world');
+
+  try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+          throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      const data = await response.json();
+      const randomQuote = data[Math.floor(Math.random() * data.length)];
+      res.json(randomQuote);
+  } catch (error) {
+      console.error('Error fetching the author:', error);
+      res.status(500).json({ error: 'Failed to fetch quote' });
+  }
 });
-//   try {
-//       const response = await fetch(apiUrl);
-//       if (!response.ok) {
-//           throw new Error(`Network response was not ok: ${response.statusText}`);
-//       }
-//       const data = await response.json();
-//       const randomQuote = data[Math.floor(Math.random() * data.length)];
-//       res.json(randomQuote);
-//   } catch (error) {
-//       console.error('Error fetching the author:', error);
-//       res.status(500).json({ error: 'Failed to fetch quote' });
-//   }
-// });
 
 // 404エラーハンドリングミドルウェア
 app.use((req, res, next) => {
