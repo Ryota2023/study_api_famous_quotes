@@ -1,11 +1,11 @@
-require('dotenv').config();  // .envファイル読込み用
+require('dotenv').config();  // .envファイル読込みに必要
 
 
 const express = require('express');
 const fetch = require('node-fetch');
 const path = require('path');
 const app = express();
-const morgan = require('morgan');
+const morgan = require('morgan');  //ecosystem.config.jsファイル読込みに必要
 const helmet = require('helmet');  //セキュリティヘッダーの設定
 
 // .envから環境変数を取得
@@ -47,7 +47,7 @@ if (NODE_ENV === 'development') {
     console.log('開発環境：');
     // 本番環境用
     app.use('/', express.static(path.join(__dirname, 'public')));
-    app.use(morgan('combined'));
+    app.use(morgan('combined'));  // 本番環境でリクエストログを記録
     app.use(helmet());  //本番環境ではセキュリティーヘッダーを使う
  
     app.get('/', (req, res) => {
