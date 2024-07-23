@@ -5,10 +5,9 @@ require('dotenv').config();
 const express = require('express');
 const fetch = require('node-fetch');
 const path = require('path');
-const fs = require('fs');
 const app = express();
 const morgan = require('morgan');
-const helmet = require('helmet');  //セキュリティヘッダーを設定する
+const helmet = require('helmet');  //セキュリティヘッダーの設定
 
 // process.envを通じて.envから環境変数を取得
 const apiUrl = process.env.API_URL;
@@ -22,16 +21,21 @@ app.use(helmet());
 
 if (NODE_ENV === 'development') {
     // 開発環境用
-    app.use(express.static(path.join(__dirname, 'public')));
+    app.use('/study_api_famous_quotes', express.static(path.join(__dirname, 'public')));
     app.use(morgan('dev'));
     console.log('*** Running in development mode ***');
 
-    app.get('/about', (req, res) => {
-        res.sendFile(path.join(__dirname, '/public', 'about.html'), (err)=> {
+    app.get('/study_api_famous_quotes/about', (req, res) => {
+        res.sendFile(path.join(__dirname, 'public', 'about.html'), (err)=> {
             if(err){
                 res.status(err.status || 500).end();
             }
         });
+    });
+
+    // ルートパスに対するファイル提供
+    app.get('/', (req, res) => {
+        res.sendFile(path.join(__dirname, 'public', 'index.html'));
     });
 
     app.use((err, req, res, next) => {
