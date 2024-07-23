@@ -1,5 +1,6 @@
-require('dotenv').config();  // .envファイル読込みに必要
+// 更新：　2024/7/34 14:34
 
+require('dotenv').config();  // .envファイル読込みに必要
 
 const express = require('express');
 const fetch = require('node-fetch');
@@ -26,16 +27,18 @@ if (NODE_ENV === 'development') {
     console.log('*** Running in development mode ***');
 
     app.get('/about', (req, res) => {
-        res.sendFile(path.join(__dirname, 'public', 'about.html'), (err)=> {
-            if(err){
-                res.status(err.status || 500).end();
-            }
+        res.sendFile(path.join(__dirname, 'public', 'about.html'), (err) => {
         });
     });
 
     // ルートパスに対するファイル提供
-    app.get('/', (req, res) => {
-        res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    // app.get('/', (req, res) => {
+    //     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    // });
+
+    app.use((req, res, next) => {
+        console.log(`Received request for: ${req.url}`);
+        next();
     });
 
     app.use((err, req, res, next) => {
@@ -49,20 +52,13 @@ if (NODE_ENV === 'development') {
     app.use('/', express.static(path.join(__dirname, 'public')));
     app.use(morgan('combined'));  // 本番環境でリクエストログを記録
     app.use(helmet());  //本番環境ではセキュリティーヘッダーを使う
- 
-    app.get('/', (req, res) => {
-      res.sendFile(path.join(__dirname, 'public/index.html'), (err) => {
-          if (err) {
-              res.status(err.status || 500).send('An error occurred while loading the file.');
-          }
-      });
-    });
+
+    // app.get('/', (req, res) => {
+    //     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    // });
 
     app.get('/about', (req, res) => {
         res.sendFile(path.join(__dirname, 'public', 'about.html'), (err) => {
-            if (err) {
-                res.status(err.status || 500).send('An error occurred while loading the file.');
-            }
         });
     });
 
@@ -74,25 +70,25 @@ if (NODE_ENV === 'development') {
 app.get('/quote', async (req, res) => {
     console.log('quote in!');   //デバック用
 
-  try {
-      const response = await fetch(apiUrl);
-      if (!response.ok) {
-          throw new Error(`Network response was not ok: ${response.statusText}`);
-      }
-      const data = await response.json();
-      const randomQuote = data[Math.floor(Math.random() * data.length)];
-      res.json(randomQuote);
-  } catch (error) {
-      console.error('Error fetching the author:', error);
-      res.status(500).json({ error: 'Failed to fetch quote' });
-  }
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        const data = await response.json();
+        const randomQuote = data[Math.floor(Math.random() * data.length)];
+        res.json(randomQuote);
+    } catch (error) {
+        console.error('Error fetching the author:', error);
+        res.status(500).json({ error: 'Failed to fetch quote' });
+    }
 });
 
 // 404エラーハンドリングミドルウェア
 app.use((req, res, next) => {
-  res.status(404).send(`404 not found`);
+    res.status(404).send(`404 not found`);
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running → http://localhost:${PORT}`);
+    console.log(`Server is running → http://localhost:${PORT}`);
 });
