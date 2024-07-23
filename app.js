@@ -1,4 +1,4 @@
-// 更新：　2024/7/34 14:57
+// 更新：　2024/7/34 15:25
 
 require('dotenv').config();  // .envファイル読込みに必要
 
@@ -15,6 +15,7 @@ const PORT = process.env.PORT || 3100; // PORT環境変数が存在しない場�
 const NODE_ENV = process.env.NODE_ENV || 'development';
 console.log(`PORT: ${PORT}`);
 console.log(`NODE_ENV: ${NODE_ENV}`);
+console.log(`API_URL: ${apiUrl}`);
 
 app.use(express.json());
 app.use(helmet());
@@ -54,14 +55,28 @@ if (NODE_ENV === 'development') {
     app.use(helmet());  //本番環境ではセキュリティーヘッダーを使う
 
     app.get('/', (req, res) => {
-        res.sendFile(path.join(__dirname, 'public', 'index.html'));
+        res.sendFile(path.join(__dirname, 'public', 'index.html'), (err) => {
+            if (err) {
+                console.error('Error sending index.html:', err);
+            }
+        });
     });
 
     app.get('/about', (req, res) => {
-        res.sendFile(path.join(__dirname, 'public', 'about.html'));
+        res.sendFile(path.join(__dirname, 'public', 'about.html'), (err) => {
+            if (err) {
+                console.error('Error sending about.html:', err);
+            }
         });
-    
+    });
+
+    app.use((req, res, next) => {
+        console.log(`Received request for: ${req.url}`);
+        next();
+    });
+
     app.use((err, req, res, next) => {
+        console.error(err.stack);
         res.status(500).send('An error occurred. Please try again later.');
     });
 }
