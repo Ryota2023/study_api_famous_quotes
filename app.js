@@ -1,6 +1,5 @@
-require('dotenv').config();  
-// .envファイルに環境変数を設定するために使う
-// dotenvパッケージ必ず一番最初に書く
+require('dotenv').config();  // .envファイル読込み用
+
 
 const express = require('express');
 const fetch = require('node-fetch');
@@ -9,7 +8,7 @@ const app = express();
 const morgan = require('morgan');
 const helmet = require('helmet');  //セキュリティヘッダーの設定
 
-// process.envを通じて.envから環境変数を取得
+// .envから環境変数を取得
 const apiUrl = process.env.API_URL;
 const PORT = process.env.PORT || 3100; // PORT環境変数が存在しない場合はデフォルト値を使用
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -20,12 +19,13 @@ app.use(express.json());
 app.use(helmet());
 
 if (NODE_ENV === 'development') {
+    console.log('開発環境：');
     // 開発環境用
-    app.use('/study_api_famous_quotes', express.static(path.join(__dirname, 'public')));
+    app.use('/', express.static(path.join(__dirname, 'public')));
     app.use(morgan('dev'));
     console.log('*** Running in development mode ***');
 
-    app.get('/study_api_famous_quotes/about', (req, res) => {
+    app.get('/about', (req, res) => {
         res.sendFile(path.join(__dirname, 'public', 'about.html'), (err)=> {
             if(err){
                 res.status(err.status || 500).end();
@@ -44,12 +44,13 @@ if (NODE_ENV === 'development') {
     });
 
 } else if (NODE_ENV === 'production') {
+    console.log('開発環境：');
     // 本番環境用
-    app.use('/study_api_famous_quotes', express.static(path.join(__dirname, 'public')));
+    app.use('/', express.static(path.join(__dirname, 'public')));
     app.use(morgan('combined'));
     app.use(helmet());  //本番環境ではセキュリティーヘッダーを使う
  
-    app.get('/study_api_famous_quotes', (req, res) => {
+    app.get('/', (req, res) => {
       res.sendFile(path.join(__dirname, 'public/index.html'), (err) => {
           if (err) {
               res.status(err.status || 500).send('An error occurred while loading the file.');
@@ -57,7 +58,7 @@ if (NODE_ENV === 'development') {
       });
     });
 
-    app.get('/study_api_famous_quotes/about', (req, res) => {
+    app.get('/about', (req, res) => {
         res.sendFile(path.join(__dirname, 'public', 'about.html'), (err) => {
             if (err) {
                 res.status(err.status || 500).send('An error occurred while loading the file.');

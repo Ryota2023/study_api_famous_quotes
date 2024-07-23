@@ -1,0 +1,12 @@
+# 環境変数の設定について
+
+# .envは開発環境用
+#   app.jsのrequire('dotenv').config();が.envを読込みしてくれる
+
+#  ecosystem.config.jsは本番環境用（以下エコと呼ぶ）
+#   pm2コマンド実行で、このファイルを読み込んでくれる
+
+# app.jsで以下コードが読み込まれるが、.env、エコともに読みに行く。
+# const apiUrl = process.env.API_URL;
+# const PORT = process.env.PORT || 3100; // PORT環境変数が存在しない場合はデフォルト値を使用
+# const NODE_ENV = process.env.NODE_ENV || 'development';
