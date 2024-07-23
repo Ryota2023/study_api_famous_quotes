@@ -20,7 +20,8 @@
     "express": "^4.19.2",
     "helmet": "^7.1.0",
     "morgan": "^1.10.0",
-    "node-fetch": "^2.7.0"
+    "node-fetch": "^2.7.0",
+    "winston": "^3.13.1"
   },
   "devDependencies": {
     "chai": "^5.1.1",
