@@ -1,4 +1,4 @@
-// 更新：　2024/7/34 14:34
+// 更新：　2024/7/34 14:57
 
 require('dotenv').config();  // .envファイル読込みに必要
 
@@ -47,7 +47,7 @@ if (NODE_ENV === 'development') {
     });
 
 } else if (NODE_ENV === 'production') {
-    console.log('開発環境：');
+    console.log('本番環境：');
     // 本番環境用
     app.use('/', express.static(path.join(__dirname, 'public')));
     app.use(morgan('combined'));  // 本番環境でリクエストログを記録
@@ -58,15 +58,15 @@ if (NODE_ENV === 'development') {
     });
 
     app.get('/about', (req, res) => {
-        res.sendFile(path.join(__dirname, 'public', 'about.html'), (err) => {
+        res.sendFile(path.join(__dirname, 'public', 'about.html');
         });
-    });
-
+    
     app.use((err, req, res, next) => {
         res.status(500).send('An error occurred. Please try again later.');
     });
 }
 
+// fetch関数
 app.get('/quote', async (req, res) => {
     console.log('quote in!');   //デバック用
 
