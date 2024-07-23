@@ -67,7 +67,7 @@ if (NODE_ENV === 'development') {
     app.use(helmet());  //本番環境ではセキュリティーヘッダーを使う
 
     // トップ画面のエンドポイントを修正
-    app.get('/study_api_famous_quotes/', (req, res) => {
+    app.get('/', (req, res) => {
         res.sendFile(path.join(__dirname, 'public', 'index.html'), (err) => {
             if (err) {
                 logger.error('Error sending index.html:', err);
