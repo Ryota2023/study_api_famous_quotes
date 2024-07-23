@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	  }
 	
 	// 本番環境用
-	//   fetch('https://xs278795.xsrv.jp/study_api_famous_quotes/quote')
-	  fetch('/study_api_famous_quotes/quote')
+	  fetch('https://xs278795.xsrv.jp/study_api_famous_quotes/quote')
+	//   fetch('/study_api_famous_quotes/quote')
 	// 開発環境用
 	  fetch('/quote')
 		.then(response => {

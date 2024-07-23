@@ -95,7 +95,7 @@ if (NODE_ENV === 'development') {
 }
 
 // fetch関数
-app.get('/study_api_famous_quotes/quote', async(req, res) => {
+app.get('/quote', async (req, res) => {
     logger.info('*quote in!');   //デバッグ用
 
     try {
