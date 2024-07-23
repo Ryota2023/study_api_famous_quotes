@@ -53,9 +53,9 @@ if (NODE_ENV === 'development') {
     app.use(morgan('combined'));  // 本番環境でリクエストログを記録
     app.use(helmet());  //本番環境ではセキュリティーヘッダーを使う
 
-    // app.get('/', (req, res) => {
-    //     res.sendFile(path.join(__dirname, 'public', 'index.html'));
-    // });
+    app.get('/', (req, res) => {
+        res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    });
 
     app.get('/about', (req, res) => {
         res.sendFile(path.join(__dirname, 'public', 'about.html'), (err) => {
