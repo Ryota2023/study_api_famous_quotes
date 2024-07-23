@@ -72,7 +72,6 @@ if (NODE_ENV === 'development') {
 
 app.get('/quote', async (req, res) => {
     console.log('quote in!');   //デバック用
-    // res.send('Hello world');
 
   try {
       const response = await fetch(apiUrl);
