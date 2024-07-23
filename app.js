@@ -50,11 +50,12 @@ if (NODE_ENV === 'development') {
 } else if (NODE_ENV === 'production') {
     console.log('本番環境：');
     // 本番環境用
-    app.use('/', express.static(path.join(__dirname, 'public')));
+    app.use('/study_api_famous_quotes', express.static(path.join(__dirname, 'public')));
     app.use(morgan('combined'));  // 本番環境でリクエストログを記録
     app.use(helmet());  //本番環境ではセキュリティーヘッダーを使う
 
-    app.get('/', (req, res) => {
+    // トップ画面のエンドポイントを修正
+    app.get('/study_api_famous_quotes/', (req, res) => {
         res.sendFile(path.join(__dirname, 'public', 'index.html'), (err) => {
             if (err) {
                 console.error('Error sending index.html:', err);
@@ -62,7 +63,7 @@ if (NODE_ENV === 'development') {
         });
     });
 
-    app.get('/about', (req, res) => {
+    app.get('/study_api_famous_quotes/about', (req, res) => {
         res.sendFile(path.join(__dirname, 'public', 'about.html'), (err) => {
             if (err) {
                 console.error('Error sending about.html:', err);
