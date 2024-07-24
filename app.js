@@ -59,8 +59,8 @@ if (NODE_ENV === 'development') {
     });
 
 } else if (NODE_ENV === 'production') {
-    console.log('本番環境用に入りました！');
-    logger.info('本番環境用に入りました！');
+    console.log('本番環境用に入りました！(app.js)');
+    logger.info('本番環境用に入りました！(app.js)');
     // 本番環境用
     app.use('/study_api_famous_quotes', express.static(path.join(__dirname, 'public')));
     app.use(morgan('combined'));  // リクエストログを記録
@@ -84,12 +84,12 @@ if (NODE_ENV === 'development') {
     });
 
     app.use((req, res, next) => {
-        logger.info(`●app.use(req,res,next)に入りました！ ${req.url}`);
+        logger.info(`●app.use(req,res,next)に入りました！(app.js) ${req.url}`);
         next();
     });
 
     app.use((err, req, res, next) => {
-        logger.info('app.use((err, req, res, next)にはいりました！');
+        logger.info('app.use((err, req, res, next)にはいりました！(app.js)');
         logger.error(err.stack);
         res.status(500).send('An error occurred. Please try again later.');
     });
@@ -97,7 +97,7 @@ if (NODE_ENV === 'development') {
 
 // fetch関数
 app.get('/quote', async (req, res) => {
-    logger.info('●app.get("/quote")に入りました！');   //デバッグ用
+    logger.info('●app.get("/quote")に入りました！(app.js)');   //デバッグ用
 
     try {
         const response = await fetch('https://raw.githubusercontent.com/quotable-io/data/master/data/quotes.json');
@@ -116,7 +116,7 @@ app.get('/quote', async (req, res) => {
 
 // 404エラーハンドリングミドルウェア
 app.use((req, res, next) => {
-    logger.info('●app.use(～ (404 not found))に入りました！');   //デバッグ用
+    logger.info('●app.use(～ (404 not found))に入りました！(app.js)');   //デバッグ用
     res.status(404).send('404 not found');
 });
 
