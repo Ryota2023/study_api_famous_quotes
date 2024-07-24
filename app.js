@@ -18,6 +18,7 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 console.log(`PORT: ${PORT}`);
 console.log(`NODE_ENV: ${NODE_ENV}`);
 console.log(`API_URL: ${apiUrl}`);
+logger.info('●app.jsに入りました(app.js:21');
 
 app.use(express.json());
 app.use(helmet());
