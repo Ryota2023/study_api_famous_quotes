@@ -20,4 +20,4 @@ module.exports = {
 // なので、NODE_ENVの設定は、 
 // 開発環境は、.env
 // 本番環境は、cosystem.config.js
-// で分けて設定している。
+// で使い分けて設定している。

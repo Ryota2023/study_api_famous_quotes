@@ -27,8 +27,7 @@ if (NODE_ENV === 'development') {
     // 開発環境用
     app.use('/', express.static(path.join(__dirname, 'public')));
     app.use(morgan('dev'));
-    console.log('*開発環境スタート*');
-    logger.info('*開発環境スタート');
+    logger.info('●開発環境スタート！(app.js)');
 
     app.get('/about', (req, res) => {
         res.sendFile(path.join(__dirname, 'public', 'about.html'), (err) => {
@@ -60,10 +59,11 @@ if (NODE_ENV === 'development') {
     });
 
 } else if (NODE_ENV === 'production') {
-    console.log('本番環境：');
+    console.log('本番環境用に入りました！');
+    logger.info('本番環境用に入りました！');
     // 本番環境用
     app.use('/study_api_famous_quotes', express.static(path.join(__dirname, 'public')));
-    app.use(morgan('combined'));  // 本番環境でリクエストログを記録
+    app.use(morgan('combined'));  // リクエストログを記録
     app.use(helmet());  //本番環境ではセキュリティーヘッダーを使う
 
     // トップ画面のエンドポイントを修正
@@ -84,7 +84,7 @@ if (NODE_ENV === 'development') {
     });
 
     app.use((req, res, next) => {
-        logger.info(`*Received req for:→ ${req.url}`);
+        logger.info(`●app.use(req,res,next)に入りました！ ${req.url}`);
         next();
     });
 
@@ -96,10 +96,10 @@ if (NODE_ENV === 'development') {
 
 // fetch関数
 app.get('/quote', async (req, res) => {
-    logger.info('*quote in!');   //デバッグ用
+    logger.info('●app.get("/quote",～に入りました！');   //デバッグ用
 
     try {
-        const response = await fetch(apiUrl);
+        const response = await fetch('https://raw.githubusercontent.com/quotable-io/data/master/data/quotes.json');
         if (!response.ok) {
             throw new Error(`Network response was not ok: ${response.statusText}`);
         }

@@ -18,13 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	  }
 	
 	// 本番環境用
-	  fetch('https://xs278795.xsrv.jp/study_api_famous_quotes/quote')
-	//   fetch('/study_api_famous_quotes/quote')
+	//   fetch('https://xs278795.xsrv.jp/study_api_famous_quotes/quote')
 	// 開発環境用
-	  fetch('/quote')
+	  fetch('quote')
 		.then(response => {
 		  if (response.ok) {
-			console.table(response);  //デバッグ用
 			return response.json();
 		  }
 		  throw new Error(`Network response was not ok: ${response.statusText}`);
@@ -33,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		  const quoteE = document.getElementById('quoteDisplay');
 		  const dsp1E = document.createElement('div');
 		  const dsp2E = document.createElement('div');
+	
 		  dsp1E.innerHTML = `●Name: ${data.author}<br><br>`;
 		  dsp2E.innerHTML = `　${data.content}<br><br><hr>`;
   
