@@ -15,7 +15,7 @@ const logger = require('./logger');  //console.logをlogs内に保存
 // .envから環境変数を取得
 const apiUrl = process.env.API_URL;
 const PORT = process.env.PORT || 3100; // PORT環境変数が存在しない場合はデフォルト値を使用
-const NODE_ENV = process.env.NODE_ENV || 'production';
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 // logs内にconsole.logを保存
 console.log(`PORT: ${PORT}`);
