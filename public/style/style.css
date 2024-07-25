@@ -7,7 +7,7 @@
 }
 
 body { 
-  margin: 0 ; /* headerの固定位置を考慮してmarginをリセット */
+  margin: 0 auto ;
   font-family: Arial, sans-serif;
   background-color: rgba(238, 239, 225, 0.526);
 }
