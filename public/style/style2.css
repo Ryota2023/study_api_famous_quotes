@@ -25,6 +25,14 @@ header {
   color:cadetblue;
 }
 
+body{	
+	margin: 10px auto;
+	display: flex;
+	justify-content: center; 
+	flex-direction: column;
+	align-items: center;
+} 
+
 main {
   margin:20px 20px;
   

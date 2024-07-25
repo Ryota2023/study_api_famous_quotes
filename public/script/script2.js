@@ -1,6 +1,8 @@
-
+const mainDate = document.querySelector('.main-date');
+const new_date = new Date();
+mainDate.textContent = new_date.toLocaleString();  
 
 setInterval( () => {
-    const d = new Date();
-    document.querySelector('.main-date').textContent = d.toLocaleString();  
+    const new_date = new Date();
+    mainDate.textContent = new_date.toLocaleString();  
 },1000);
