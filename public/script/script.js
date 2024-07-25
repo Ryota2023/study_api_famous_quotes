@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+    let count = false; // 変数を適切に定義
+
     const clickSound = document.getElementById('soundEffect');
     if (clickSound) {
         clickSound.addEventListener('canplaythrough', () => {
@@ -10,11 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.getElementById('getQuote').addEventListener('click', async () => {
+        console.log('getQuote button clicked');
         try {
             const soundForm = document.getElementById('soundForm');
             const selectedRadio = soundForm.querySelector('input[name="radio"]:checked');
 
             if (selectedRadio && selectedRadio.value === 'ON') {
+                console.log('Playing sound');
                 if (clickSound) {
                     await clickSound.play().catch(error => {
                         console.error('Error playing the sound:', error);
@@ -22,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            console.log('Fetching quote');
             const response = await fetch('./quote');
             if (!response.ok) {
                 throw new Error(`Network response was not ok: ${response.statusText}`);
@@ -35,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function displayQuote(data) {
+        console.log('Displaying quote:', data);
         const quoteE = document.getElementById('quoteDisplay');
         const dsp1E = document.createElement('div');
         const dsp2E = document.createElement('div');
@@ -49,7 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const soundForm = document.getElementById('soundForm');
     soundForm.addEventListener('change', (event) => {
+        console.log('Sound form changed');
         if (event.target && event.target.name === 'radio' && event.target.value === 'ON') {
+            console.log('Radio button set to ON');
             if (!count) {
                 count = true;
                 return;
