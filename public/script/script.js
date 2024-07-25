@@ -1,4 +1,3 @@
-let count = false;
 document.addEventListener('DOMContentLoaded', () => {
     const clickSound = document.getElementById('soundEffect');
     if (clickSound) {
@@ -23,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Fetch request
             const response = await fetch('./quote');
             if (!response.ok) {
                 throw new Error(`Network response was not ok: ${response.statusText}`);
@@ -51,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const soundForm = document.getElementById('soundForm');
     soundForm.addEventListener('change', (event) => {
-        if (event.target.name === 'radio' && event.target.value === 'ON') {
+        if (event.target && event.target.name === 'radio' && event.target.value === 'ON') {
             if (!count) {
                 count = true;
                 return;
