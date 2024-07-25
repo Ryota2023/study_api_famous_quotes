@@ -1,4 +1,7 @@
-//app.js
+//
+// 開発環境では、101行目のfetch関数を使う
+// 本番環境では、99行目のfetch関数を使う
+//
 require('dotenv').config();  // .envファイル読込みに必要
 
 const express = require('express');
@@ -97,9 +100,9 @@ if (NODE_ENV === 'development') {
 }
 
 // fetch関数（本番環境用）
-// app.get('/study_api_famous_quotes/quote', async (req, res) => {
+app.get('/study_api_famous_quotes/quote', async (req, res) => {
 // fetch関数（開発環境用）
-app.get('/quote', async (req, res) => {
+// app.get('/quote', async (req, res) => {
     logger.info('●app.get("/quote")に入りました！(app.js)');   //デバッグ用
 
     try {
