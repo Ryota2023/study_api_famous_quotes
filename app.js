@@ -33,15 +33,6 @@ if (NODE_ENV === 'development') {
    app.use(morgan('dev'));
    logger.info('●開発環境スタート！(app.js)');
 
-   app.get('/about', (req, res) => {
-      res.sendFile(path.join(__dirname, 'public', 'about.html'), (err) => {
-         if (err) {
-            console.log('エラー：/about→ ', err);
-            logger.error('エラー：/about→ ', err);
-         }
-      });
-   });
-
    // ルートパスに対するファイル提供
    app.get('/', (req, res) => {
       res.sendFile(path.join(__dirname, 'public', 'index.html'), (err) => {
@@ -71,18 +62,10 @@ if (NODE_ENV === 'development') {
    app.use(helmet());  //本番環境ではセキュリティーヘッダーを使う
 
    // トップ画面のエンドポイントを修正
-   app.get('/', (req, res) => {
+   app.get('/12345', (req, res) => {
       res.sendFile(path.join(__dirname, 'public', 'index.html'), (err) => {
          if (err) {
             logger.error('Error sending index.html:', err);
-         }
-      });
-   });
-
-   app.get('/about', (req, res) => {
-      res.sendFile(path.join(__dirname, 'public', 'about.html'), (err) => {
-         if (err) {
-            logger.error('Error sending about.html:', err);
          }
       });
    });
