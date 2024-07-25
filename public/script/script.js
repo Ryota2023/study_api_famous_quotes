@@ -1,75 +1,56 @@
+'use strict';
+// 画面のローディング
+
 document.addEventListener('DOMContentLoaded', () => {
-    let count = false; // 変数を適切に定義
 
-    const clickSound = document.getElementById('soundEffect');
-    if (clickSound) {
-        clickSound.addEventListener('canplaythrough', () => {
-            console.log('Sound can play through without stopping.');
-        }, false);
-        clickSound.addEventListener('error', (e) => {
-            console.error('Error occurred while loading the sound:', e);
-        }, false);
-    }
+   const soundEffect = document.querySelector('#soundEffect'); //音
+   const getQuote = document.querySelector('#getQuote'); //検索ボタン
 
-    document.getElementById('getQuote').addEventListener('click', async () => {
-        console.log('getQuote button clicked');
-        try {
-            const soundForm = document.getElementById('soundForm');
-            const selectedRadio = soundForm.querySelector('input[name="radio"]:checked');
-
-            if (selectedRadio && selectedRadio.value === 'ON') {
-                console.log('Playing sound');
-                if (clickSound) {
-                    await clickSound.play().catch(error => {
-                        console.error('Error playing the sound:', error);
-                    });
-                }
-            }
-
-            console.log('Fetching quote');
-            const response = await fetch('./quote');
-            if (!response.ok) {
-                throw new Error(`Network response was not ok: ${response.statusText}`);
-            }
-            const data = await response.json();
-            displayQuote(data);
-        } catch (error) {
-            console.error('エラー発生: fetching the quote:', error);
-            document.getElementById('quoteDisplay').innerText = 'Failed to fetch quote.';
-        }
-    });
-
-    function displayQuote(data) {
-        console.log('Displaying quote:', data);
-        const quoteE = document.getElementById('quoteDisplay');
-        const dsp1E = document.createElement('div');
-        const dsp2E = document.createElement('div');
-        dsp1E.innerHTML = `●Name: ${data.author}<br><br>`;
-        dsp2E.innerHTML = `　${data.content}<br><br><hr>`;
-
-        quoteE.appendChild(dsp1E);
-        quoteE.appendChild(dsp2E);
-
-        dsp2E.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    const soundForm = document.getElementById('soundForm');
-    soundForm.addEventListener('change', (event) => {
-        console.log('Sound form changed');
-        if (event.target && event.target.name === 'radio' && event.target.value === 'ON') {
-            console.log('Radio button set to ON');
-            if (!count) {
-                count = true;
-                return;
-            }
-            const soundEffect = document.getElementById('soundEffect');
+   getQuote.addEventListener('click', async () => {
+      try {
+                  
+         //-------- 先にサウンド判定 --------
+         const selectedRadio = document.querySelector('input[name="radio"]:checked');
+         if (selectedRadio && selectedRadio.value === 'ON') {
+            console.log('Playing sound');
             if (soundEffect) {
-                soundEffect.play().catch(error => {
-                    console.error('Error playing the sound:', error);
-                });
+               await soundEffect.play().catch(error => {
+                  console.error('Error playing the sound:', error);
+               });
             }
-        } else {
-            count = false;
-        }
-    });
+         }
+
+         //-------- API --------
+         console.log('APIリクエスト送信(script.js:23行)');
+         const response = await fetch('./quote');
+         console.log('APIレスポンス受信(script.js:25行)');
+
+         if (!response.ok) {
+            throw new Error(`HTTP response was not ok(script.js:28行): ${response.statusText}`);
+         }
+         //-------- レスポンス成功 --------
+         const data = await response.json();
+         displayQuote(data);  //関数側でレスポンスデータ出力処理
+
+      } catch (error) {
+         console.error('APIエラー(script.js:35行): ', error);
+         document.getElementById('quoteDisplay').innerText = 'データ取得できませんでした';
+      }
+   });
+
+   // レスポンスデータ出力処理を外に持ってきた
+   function displayQuote(data) {
+      console.table('*response.json():', data);
+      const quoteE = document.querySelector('#quoteDisplay');
+      const dsp1E = document.createElement('div');
+      const dsp2E = document.createElement('div');
+      
+      //出力
+      dsp1E.innerHTML = `●Name: ${data.author}<br><br>`;
+      dsp2E.innerHTML = `　${data.content}<br><br><hr>`;
+
+      quoteE.appendChild(dsp1E);
+      quoteE.appendChild(dsp2E);
+      dsp2E.scrollIntoView({ behavior: 'smooth' });
+   }
 });
