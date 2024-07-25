@@ -1,64 +1,69 @@
-// 更新： 2024/7/23/14/56
-
 let count = false;
-
-//クリックイベントつける時は、これがあったほうが良いみたい
 document.addEventListener('DOMContentLoaded', () => {
-	// getQuoteボタンのイベントリスナーを設定
-	document.getElementById('getQuote').addEventListener('click', () => {
- 
-  	  // ラジオボタンの値を取得
-		const soundForm = document.getElementById('soundForm');
-		const selectedRadio = soundForm.querySelector('input[name="radio"]:checked');
+    const clickSound = document.getElementById('soundEffect');
+    if (clickSound) {
+        clickSound.addEventListener('canplaythrough', () => {
+            console.log('Sound can play through without stopping.');
+        }, false);
+        clickSound.addEventListener('error', (e) => {
+            console.error('Error occurred while loading the sound:', e);
+        }, false);
+    }
 
-		// 音を再生する
-	  if (selectedRadio && selectedRadio.value === 'ON') {
-		const clickSound = document.getElementById('soundEffect');
-		clickSound.play();
-	  }
-	
-	// 本番環境用
-	//   fetch('https://xs278795.xsrv.jp/study_api_famous_quotes/quote')
-	// 開発環境用
-	  fetch('./quote')
-		.then(response => {
-		  if (response.ok) {
-			return response.json();
-		  }
-		  throw new Error(`Network response was not ok: ${response.statusText}`);
-		})
-		.then(data => {
-		  const quoteE = document.getElementById('quoteDisplay');
-		  const dsp1E = document.createElement('div');
-		  const dsp2E = document.createElement('div');
-	
-		  dsp1E.innerHTML = `●Name: ${data.author}<br><br>`;
-		  dsp2E.innerHTML = `　${data.content}<br><br><hr>`;
-  
-		  quoteE.appendChild(dsp1E);
-		  quoteE.appendChild(dsp2E);
-  
-		  // 新しい要素にスクロール  
-		  dsp2E.scrollIntoView({ behavior: 'smooth' });
-		})
-		.catch(error => {
-		  console.error('エラー発生: fetching the quote:', error);
-		  document.getElementById('quoteDisplay').innerText = 'Failed to fetch quote.';
-		});
-	});
-  
-	// ラジオボタンのイベントリスナーを設定
-	const soundForm = document.getElementById('soundForm');
-	soundForm.addEventListener('change', (event) => {
-	if (event.target.name === 'radio' && event.target.value === 'ON') {
-		if (!count){
-			count = true;
-			return;	
-		} 
-		const soundEffect = document.getElementById('soundEffect');
-		soundEffect.play();
-	} else {
-		count = false;
-	}
-	});
-  });
+    document.getElementById('getQuote').addEventListener('click', async () => {
+        try {
+            const soundForm = document.getElementById('soundForm');
+            const selectedRadio = soundForm.querySelector('input[name="radio"]:checked');
+
+            if (selectedRadio && selectedRadio.value === 'ON') {
+                if (clickSound) {
+                    await clickSound.play().catch(error => {
+                        console.error('Error playing the sound:', error);
+                    });
+                }
+            }
+
+            // Fetch request
+            const response = await fetch('./quote');
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            const data = await response.json();
+            displayQuote(data);
+        } catch (error) {
+            console.error('エラー発生: fetching the quote:', error);
+            document.getElementById('quoteDisplay').innerText = 'Failed to fetch quote.';
+        }
+    });
+
+    function displayQuote(data) {
+        const quoteE = document.getElementById('quoteDisplay');
+        const dsp1E = document.createElement('div');
+        const dsp2E = document.createElement('div');
+        dsp1E.innerHTML = `●Name: ${data.author}<br><br>`;
+        dsp2E.innerHTML = `　${data.content}<br><br><hr>`;
+
+        quoteE.appendChild(dsp1E);
+        quoteE.appendChild(dsp2E);
+
+        dsp2E.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    const soundForm = document.getElementById('soundForm');
+    soundForm.addEventListener('change', (event) => {
+        if (event.target.name === 'radio' && event.target.value === 'ON') {
+            if (!count) {
+                count = true;
+                return;
+            }
+            const soundEffect = document.getElementById('soundEffect');
+            if (soundEffect) {
+                soundEffect.play().catch(error => {
+                    console.error('Error playing the sound:', error);
+                });
+            }
+        } else {
+            count = false;
+        }
+    });
+});
