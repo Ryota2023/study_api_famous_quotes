@@ -1,9 +1,19 @@
+let count = false;
 document.addEventListener('DOMContentLoaded', () => {
+    const clickSound = document.getElementById('soundEffect');
+    if (clickSound) {
+        clickSound.addEventListener('canplaythrough', () => {
+            console.log('Sound can play through without stopping.');
+        }, false);
+        clickSound.addEventListener('error', (e) => {
+            console.error('Error occurred while loading the sound:', e);
+        }, false);
+    }
+
     document.getElementById('getQuote').addEventListener('click', async () => {
         try {
             const soundForm = document.getElementById('soundForm');
             const selectedRadio = soundForm.querySelector('input[name="radio"]:checked');
-            const clickSound = document.getElementById('soundEffect');
 
             if (selectedRadio && selectedRadio.value === 'ON') {
                 if (clickSound) {
@@ -13,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            // Fetch request
             const response = await fetch('./quote');
             if (!response.ok) {
                 throw new Error(`Network response was not ok: ${response.statusText}`);
