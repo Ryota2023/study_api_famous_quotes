@@ -43,11 +43,12 @@ main {
 }
 
 .main-date {
+   margin-right: 8px;
    text-align: right;
 }
 
-h1 {
-   margin: 20px 0;
+.sub-title {
+   margin-left: 8px;
 }
 
 img {
@@ -68,20 +69,17 @@ a p {
 @media (max-width: 700px) {
    .header {
       font-size: 0.8em;
-      /* フォントサイズを小さくする */
    }
 }
 
 @media (max-width: 500px) {
    .header {
       font-size: 0.6em;
-      /* さらに小さくする */
    }
 }
 
 @media (max-width: 300px) {
    .header {
       font-size: 0.4em;
-      /* さらに小さくする */
    }
 }
