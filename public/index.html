@@ -2,53 +2,55 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&family=Zen+Kaku+Gothic+New&display=swap"
-        rel="stylesheet">
-    <!-- <base href="/study_api_famous_quotes/"> -->
-    <link rel="icon" type="image/png" sizes="16x16" href="./img/quotes1_16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./img/quotes1_32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="./img/quotes1_96.png">
-    <link rel="stylesheet" href="./style/style.css">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&family=Zen+Kaku+Gothic+New&display=swap"
+      rel="stylesheet">
+   <!-- <base href="/study_api_famous_quotes/"> -->
+   <link rel="icon" type="image/png" sizes="16x16" href="./img/quotes1_16.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="./img/quotes1_32.png">
+   <link rel="icon" type="image/png" sizes="96x96" href="./img/quotes1_96.png">
+   <link rel="stylesheet" href="./style/style.css">
 
-    <title>世界の著名人の言葉</title>
+   <title>世界の著名人の言葉</title>
 </head>
 
 <body>
-    <header>
-        <div class="header-box">
-            <div class="header-box1">
+   <header>
+      <div class="header-box">
+         <div class="header-box1">
 
-                <form id="soundForm">
-                    <div>Sound</div>
-                    <label><input type="radio" name="radio" value="ON">ON</label><br>
-                    <label><input type="radio" name="radio" value="OFF">OFF</label>
-                </form>
-                <audio id="soundEffect" src="./sound/effect3.mp3" preload="auto"></audio>
-            </div>
+            <form id="soundForm">
+               <div>Sound</div>
+               <label><input type="radio" name="radio" value="ON">ON</label><br>
+               <label><input type="radio" name="radio" value="OFF">OFF</label>
+            </form>
+            <audio id="soundEffect" src="./sound/effect3.mp3" preload="auto"></audio>
+         </div>
 
-            <div class="header-box2">
-                <h1>世界の著名人たちの言葉</h1>
-                <button id="getQuote">どんな言葉があるだろう？</button>
-            </div>
-            
-            <div class="header-box3">
-                <div class="header-box3-1"><a href="./about.html">about</a></div>
-                <div class="header-box3-1"><a href="">Login</a></div>
-                <div class="header-box3-1"><a href="">My favorite</a></div>
-            </div>
-        </div>
-    </header>
+         <div class="header-box2">
+            <h1>世界の著名人たちの言葉</h1>
+            <button id="getQuote">　どんな言葉があるだろう？　</b utton>
+         </div>
 
-    <main>
-        <div class="main-container">
-            <div id="quoteDisplay"></div>
-        </div>
-    </main>
-    <script src="./script/script.js"></script>
+         <div class="header-box3">
+            <div class="header-box3_child">
+               <div class="header-box3-1"><a href="">login</a></div>
+               <div class="header-box3-1"><a href="./b-time.html">break time</a></div>
+               <div class="header-box3-1"><a href="">My favorite</a></div>
+            </div>
+         </div>
+      </div>
+   </header>
+
+   <main>
+      <div class="main-container">
+         <div id="quoteDisplay"></div>
+      </div>
+   </main>
+   <script src="./script/script.js"></script>
 </body>
 
 </html>

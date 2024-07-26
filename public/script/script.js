@@ -45,12 +45,25 @@ document.addEventListener('DOMContentLoaded', () => {
       const dsp1E = document.createElement('div');
       const dsp2E = document.createElement('div');
       
-      //出力
+      // 出力
       dsp1E.innerHTML = `●Name: ${data.author}<br><br>`;
-      dsp2E.innerHTML = `　${data.content}<br><br><hr>`;
-
+      dsp1E.style.marginTop = '18px'; // 文字の上に余白を入れる
+   
+      dsp2E.innerHTML = `　${data.content}`; // 内容のみをセット
+      dsp2E.style.marginBottom = '38px'; // 下に余白を追加
+   
+      // 余白を管理するために適切なスタイルを追加
+      dsp1E.style.display = 'block';
+      dsp2E.style.display = 'block';
+   
+      // <hr> 要素を作成
+      const hrE = document.createElement('hr');
+   
       quoteE.appendChild(dsp1E);
       quoteE.appendChild(dsp2E);
+      quoteE.appendChild(hrE); // hr を追加
       dsp2E.scrollIntoView({ behavior: 'smooth' });
    }
+   
+
 });
