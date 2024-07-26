@@ -36,11 +36,18 @@ header {
   padding: 0;
 }
 
-.header-box1,
-.header-box3 {
+.header-box1 {
   flex: 1;
   padding: 10px 0;
   text-align: left;
+  height: 100%;
+}
+
+.header-box3 {
+  flex: 1;
+  padding: 22px 0 10px; /* 上側に12pxの余白を追加 */
+  text-align: right;
+  font-weight: bold;
   height: 100%;
 }
 
