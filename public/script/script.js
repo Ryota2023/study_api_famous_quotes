@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
    const soundEffect = document.querySelector('#soundEffect'); //音
    const getQuote = document.querySelector('#getQuote'); //検索ボタン
+   const selectedRadio = document.querySelector('input[name="radio"]:checked').value = 'on';
+   console.log(selectedRadio);
+
 
    getQuote.addEventListener('click', async () => {
       try {
@@ -20,10 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
          }
 
-         //-------- API --------
-         console.log('APIリクエスト送信(script.js:23行)');
+         //-------- Fetch API --------
+         console.log('API:リクエスト送信(script.js:23行)');
          const response = await fetch('./quote');
-         console.log('APIレスポンス受信(script.js:25行)');
+         console.log('API:レスポンス受信(script.js:25行)');
 
          if (!response.ok) {
             throw new Error(`HTTP response was not ok(script.js:28行): ${response.statusText}`);

@@ -13,10 +13,11 @@
   },
   "created_date": "2024-7-12",
   "keywords": [],
-  "author": "girimax ryota",
+  "author": "girimax",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
     "express": "^4.19.2",
     "helmet": "^7.1.0",
     "morgan": "^1.10.0",

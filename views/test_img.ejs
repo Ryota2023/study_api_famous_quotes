@@ -1,0 +1,23 @@
+<!DOCTYPE>
+<html lang="ja">
+<head>
+    <meta chartset="utf-8">
+    <meta name="viewport", content="width=device-width, initial-scale=1.0">
+    <title><%=title %></title>
+    <style>
+        body{text-align:center;}
+    </style>
+</head>
+<body>
+    <div class="box1" style="display:flex; justify-content:center">
+    <h3 style="max-width:400px;background: #edf;">
+        バックエンドに保存した画像データを
+        imgタグのsrcに設定して、
+        フロントエンドのブラウザに表示できるかのテスト</h3>
+    </div>
+    <h3><%= title %></h3>
+    <div id="new-image">
+        <img src="/image" alt="" width="200px">
+    </div>
+</body>
+</html>

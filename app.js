@@ -2,14 +2,17 @@
 // 開発環境では、62行目のfetch関数を使う
 // 本番環境では、64行目のfetch関数を使う
 //
+
 require('dotenv').config();  // .envファイル読込み用
 const express = require('express');
-const fetch = require('node-fetch');
-const path = require('path');
 const app = express();
+const path = require('path');
+const ejs = require('ejs');
+const fetch = require('node-fetch');
 const morgan = require('morgan');  // ecosystem.config.jsファイル読込み用
 const helmet = require('helmet');  // セキュリティ対策
 const logger = require('./logger');  //console.logをlogs内に保存する
+const routes = require('./routes/route.js');
 
 // .envから環境変数を取得
 const apiUrl = process.env.API_URL;
@@ -20,6 +23,9 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 console.log(`PORT: ${PORT}`);
 console.log(`NODE_ENV: ${NODE_ENV}`);
 console.log(`API_URL: ${apiUrl}`);
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.json());
 app.use(helmet());   //セキュリティ対策
@@ -34,6 +40,9 @@ if (NODE_ENV === 'development') {
       console.log(`req.urlは→ ${req.url}`);
       next();
    });
+
+   app.get('/test_gamen', routes.testGamen);
+   app.get('/image', routes.newImage);  //画像だけを読み込む
 
    app.use((err, req, res, next) => {
       console.error(err.stack);
@@ -59,9 +68,9 @@ if (NODE_ENV === 'development') {
 }
 
 // fetch関数（本番環境用）
-app.get('/study_api_famous_quotes/quote', async (req, res) => {
+// app.get('/study_api_famous_quotes/quote', async (req, res) => {
 // fetch関数（開発環境用）
-// app.get('/quote', async (req, res) => {
+app.get('/quote', async (req, res) => {
    logger.info('●fetch関数内に入りました！(app.js:65行)');   //デバッグ用
 
    try {
