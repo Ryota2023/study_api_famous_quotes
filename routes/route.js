@@ -7,7 +7,7 @@ exports.testGamen = function (req, res) {
 }
 
 exports.newImage = function (req, res) {
-   const imagePath = path.join(__dirname, '../stock', 'na6.jpg');
+   const imagePath = path.join(__dirname, '../stock/img', 'na6.jpg');
    res.sendFile(imagePath);
 }
 
