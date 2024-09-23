@@ -1,22 +1,19 @@
 'use strict';
+
+// 開発環境、本番環境でfetchのエンドポイントを切り替えること
 // 画面のローディング
 
 document.addEventListener('DOMContentLoaded', () => {
 
    const soundEffect = document.querySelector('#soundEffect'); //音
    const getQuote = document.querySelector('#getQuote'); //検索ボタン
-
-
    const selectedRadio = document.querySelector('input[name="radio"]:checked');
    if (selectedRadio) {
       console.log(selectedRadio.value);  // 'ON' もしくは 'OFF'
    }
 
-
-
    getQuote.addEventListener('click', async () => {
       try {
-
          //-------- 先にサウンド判定 --------
          const selectedRadio = document.querySelector('input[name="radio"]:checked');
          if (selectedRadio && selectedRadio.value === 'ON') {
@@ -31,9 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
          //-------- Fetch API --------
          console.log('API:リクエスト送信(script.js:23行)');
          //開発環境用
-         //   const response = await fetch('./quote');
+         // const response = await fetch('./quote');
          //本番環境用(まだ試してない)
-         const response = await fetch('https://xs278795.xsrv.jp/study_api_famous_quotes/');
+         const response = await fetch('https://xs278795.xsrv.jp/study_api_famous_quotes/quote');
 
          console.log('API:レスポンス受信(script.js:25行)');
 
