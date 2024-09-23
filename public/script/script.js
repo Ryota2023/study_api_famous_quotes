@@ -35,10 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // 本番環境の場合
             apiEndpoint = 'https://xs278795.xsrv.jp/study_api_famous_quotes/quote';
          }
-
-         console.log('API:リクエスト送信(script.js:23行)');
+         console.log('hostname: ',window.location.hostname);
+         console.log('API:リクエスト送信(script.js)');
          const response = await fetch(apiEndpoint);
-         console.log('API:レスポンス受信(script.js:25行)');
+         console.log('API:レスポンス受信(script.js)');
 
          if (!response.ok) {
             throw new Error(`HTTP response was not ok(script.js:28行): ${response.statusText}`);
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
    // レスポンスデータ出力処理を外に持ってきた
    function displayQuote(data) {
-      console.table('*response.json():⇓⇓⇓', data);
+      console.table('response.json(): ', data);
       const quoteE = document.querySelector('#quoteDisplay');
       const dsp1E = document.createElement('div');
       const dsp2E = document.createElement('div');
