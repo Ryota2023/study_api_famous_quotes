@@ -26,12 +26,18 @@ document.addEventListener('DOMContentLoaded', () => {
          }
 
          //-------- Fetch API --------
-         console.log('API:リクエスト送信(script.js:23行)');
-         //開発環境用
-         // const response = await fetch('./quote');
-         //本番環境用(まだ試してない)
-         const response = await fetch('https://xs278795.xsrv.jp/study_api_famous_quotes/quote');
+         //本番環境と開発環境でエンドポイントを自動で切り替える
+         let apiEndpoint;
+         if (window.location.hostname === 'localhost') {
+            // 開発環境の場合
+            apiEndpoint = './quote';
+         } else {
+            // 本番環境の場合
+            apiEndpoint = 'https://xs278795.xsrv.jp/study_api_famous_quotes/quote';
+         }
 
+         console.log('API:リクエスト送信(script.js:23行)');
+         const response = await fetch(apiEndpoint);
          console.log('API:レスポンス受信(script.js:25行)');
 
          if (!response.ok) {

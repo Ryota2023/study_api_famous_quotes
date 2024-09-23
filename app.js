@@ -70,10 +70,15 @@ if (NODE_ENV === 'development') {
    });
 }
 
-// fetch関数（本番環境用）
-// app.get('/study_api_famous_quotes/quote', async (req, res) => {
-// fetch関数（開発環境用）
-app.get('/quote', async (req, res) => {
+// 本番環境用と開発環境用でエンドポイントを切り替える
+// 本番環境: app.get('/study_api_famous_quotes/quote', 
+// 開発環境: app.get('/quote', 
+
+const endpoint = NODE_ENV === 'production' 
+   ? '/study_api_famous_quotes/quote'
+   : '/quote'
+
+app.get(endpoint, async (req, res) => {
    logger.info('●fetch関数内に入りました！(app.js:65行)');   //デバッグ用
 
    try {
@@ -93,7 +98,7 @@ app.get('/quote', async (req, res) => {
 
 // 404エラーハンドリングミドルウェア
 app.use((req, res, next) => {
-   logger.info('●app.use(～ (404 not found))に入りました！(app.js)');   //デバッグ用
+   logger.info('●app.use(～ (404 not found))に入りました(app.js)');   //デバッグ用
    res.status(404).send('404 not found');
 });
 
