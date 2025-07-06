@@ -28,13 +28,15 @@ document.addEventListener('DOMContentLoaded', () => {
          //-------- Fetch API --------
          //本番環境と開発環境でエンドポイントを自動で切り替える
          let apiEndpoint;
-         if (window.location.hostname === 'localhost') {
+         apiEndpoint = './quote';
+
+         // if (window.location.hostname === 'localhost') {
             // 開発環境の場合
-            apiEndpoint = './quote';
-         } else {
+         //    apiEndpoint = './quote';
+         // } else {
             // 本番環境の場合
-            apiEndpoint = 'https://xs278795.xsrv.jp/study_api_famous_quotes/quote';
-         }
+         //    apiEndpoint = 'https://xs278795.xsrv.jp/study_api_famous_quotes/quote';
+         // }
          console.log('hostname: ',window.location.hostname);
          console.log('API:リクエスト送信(script.js)');
          const response = await fetch(apiEndpoint);
