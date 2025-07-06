@@ -13,6 +13,7 @@
    <link rel="icon" type="image/png" sizes="32x32" href="./img/quotes1_32.png">
    <link rel="icon" type="image/png" sizes="96x96" href="./img/quotes1_96.png">
    <link rel="stylesheet" href="./style/style.css">
+   <link rel="stylesheet" href="./style/style3.css">
 
    <title>API FAMOUS QUOTES</title>
 </head>
@@ -24,8 +25,8 @@
 
             <form id="soundForm">
                <div>Sound</div>
-               <label><input type="radio" name="radio" value="ON">ON</label><br>
-               <label><input type="radio" name="radio" value="OFF" checked>OFF</label>
+               <label><input type="radio" name="radio" value="ON" checked>ON</label><br>
+               <label><input type="radio" name="radio" value="OFF">OFF</label>
             </form>
             <audio id="soundEffect" src="./sound/effect3.mp3" preload="auto"></audio>
          </div>
@@ -36,11 +37,18 @@
          </div>
 
          <div class="header-box3">
-            <div class="header-box3_child">
-               <div class="header-box3-1"><a href="">login</a></div>
-               <div class="header-box3-1"><a href="">My favorite</a></div>
-               <div class="header-box3-1"><a href="./b-time.html">break time</a></div>
-               
+            <div class="hamburger-menu">
+               <div class="hamburger-icon">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+               </div>
+               <div class="menu-content">
+                  <div id="testLogin"class="menu-item"><a href="">login</a></div>
+                  <div class="menu-item"><a href="#" id="howToEnjoy">How to enjoy</a></div>
+                  <div class="menu-item"><a href="#" id="dataClear">Delete Data</a></div>
+                  <div id="test-B-Time" class="menu-item"><a href="./b-time.html">break time</a></div>
+               </div>
             </div>
          </div>
       </div>
@@ -51,7 +59,15 @@
          <div id="quoteDisplay"></div>
       </div>
    </main>
+
+   <!-- モーダルウィンドウ -->
+   <div id="modal" class="modal">
+      <div class="modal-content">
+         <span id="modalMessage"></span>
+      </div>
+   </div>
    <script src="./script/script.js"></script>
+   <script src="./script/script-hamburger-menu.js"></script>
 </body>
 
 </html>

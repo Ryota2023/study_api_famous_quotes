@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <div class="box1" style="display:flex; justify-content:center">
+    <div style="display:flex; justify-content:center">
         <h3 style="max-width:600px; text-align: left;">
             バックエンドに保存した画像データをimgタグのsrcに設定して、
             フロントエンドのブラウザに表示できるかのテスト→sendFile使ってできた</h3>
@@ -24,8 +24,9 @@
         <%= title %>
     </h2>
     <div id="new-image">
-        <img src="/image" alt="" width="600px">
-    </div>
+        <img src="/image" alt="" style="max-width:600px">
+    </div><br>
+    <a href="/" style="max-width:600px; text-align: left; margin-top:10px">ホームに戻る</a>
 </body>
 
 </html>

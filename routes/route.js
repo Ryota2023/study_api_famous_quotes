@@ -3,7 +3,7 @@ const path = require('path');
 
 exports.testGamen = function (req, res) {
    const data = { title: "画像テスト" };
-   res.render('test_img', data);
+   res.render('test-img', data);
 }
 
 exports.newImage = function (req, res) {

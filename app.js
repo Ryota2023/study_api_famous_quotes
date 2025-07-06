@@ -44,12 +44,12 @@ if (NODE_ENV === 'development') {
     // 一度フロントでhtml読んだ後にsrc="/image"とすることで、
     // 再度バックエンド側にリクエストし、画像ファイルを非公開ディレクトリから
     // res.fileSendを使用して送り返す手法
-   app.get('/test_gamen', routes.testGamen);
+   app.get('/test', routes.testGamen);
    app.get('/image', routes.newImage);  
 
    app.use((err, req, res, next) => {
       console.error(err.stack);
-      res.status(500).send('Something broke!');
+      res.status(500).send('***　status 500　***');
    });
 
 } else if (NODE_ENV === 'production') {
