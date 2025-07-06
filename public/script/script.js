@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
          dsp2E.innerHTML = `　${quote.content}`; // 内容のみをセット
          dsp2E.style.marginBottom = '38px'; // 下に余白を追加
+         dsp2E.style.fontStyle = 'italic';  // ← ここを追加（イタリック体）
 
          // 余白を管理するために適切なスタイルを追加
          dsp1E.style.display = 'block';

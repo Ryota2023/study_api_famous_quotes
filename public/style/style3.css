@@ -55,11 +55,11 @@
   position: absolute;
   top: 100%;
   right: 0;
-  background: white;
+  background:white;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  min-width: 150px;
+  min-width: 450px; /* 150px × 3 = 450px */
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
@@ -74,7 +74,7 @@
 }
 
 .menu-item {
-  padding: 12px 20px;
+  padding: 36px 60px; /* 12px × 3 = 36px, 20px × 3 = 60px */
   border-bottom: 1px solid #eee;
   transition: background-color 0.2s ease;
 }
@@ -90,8 +90,10 @@
 .menu-item a {
   text-decoration: none;
   color: #333;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 20px; /* 14px × 2 = 28px */
+  font-family: 'Libre Baskerville', serif;
+  font-style: italic;
+  font-weight: bold;
   display: block;
 }
 
@@ -124,15 +126,15 @@
   }
   
   .menu-content {
-    min-width: 120px;
+    min-width: 360px; /* 120px × 3 = 360px */
   }
   
   .menu-item {
-    padding: 10px 15px;
+    padding: 30px 45px; /* 10px × 3 = 30px, 15px × 3 = 45px */
   }
   
   .menu-item a {
-    font-size: 12px;
+    font-size: 18px; /* 12px × 2 = 24px */
   }
 }
 
@@ -160,16 +162,16 @@
   }
   
   .menu-content {
-    min-width: 100px;
+    min-width: 300px; /* 100px × 3 = 300px */
   }
   
   .menu-item {
-    padding: 8px 12px;
+    padding: 24px 36px; /* 8px × 3 = 24px, 12px × 3 = 36px */
   }
   
-     .menu-item a {
-     font-size: 11px;
-   }
+  .menu-item a {
+    font-size: 16px; /* 11px × 2 = 22px */
+  }
 }
 
 /* モーダルウィンドウのスタイル */
