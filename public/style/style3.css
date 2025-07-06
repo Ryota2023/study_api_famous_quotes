@@ -203,7 +203,7 @@
   margin: calc(10% + 60px) auto 10% auto; /* 上から60px下げる */
 }
 
-/* data clear用のモーダルスタイル */
+/* r用のモーダルスタイル */
 .modal-content.data-clear {
   max-width: 400px;
   text-align: center;

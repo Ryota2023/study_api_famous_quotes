@@ -146,9 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
          e.stopPropagation(); // イベントの伝播を停止
 
          const message = `世界の著名人たちの名言を、ランダムに表示するシンプルなWebアプリです。
-ボタンをクリックすると、新しい名言が次々と表示されます。
+ボタンをクリックすると、新しい名言が表示されます。
 表示された名言は、お使いの端末に自動保存されるため、いつでも再アクセスして確認できます。
-保存データを削除する場合は、メニューの「Data Clear」から削除できます。
+保存データを削除する場合は、メニューの「Delete Clear」から削除できます。
 それでは、素敵な名言との出会いをお楽しみください。`;
 
          // モーダルウィンドウを表示（自動閉じない）
@@ -159,14 +159,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
    }
 
-   // モーダルウィンドウの背景クリックで閉じる
+   // モーダルウィンドウのクリックで閉じる
    const modal = document.querySelector('#modal');
    if (modal) {
       modal.addEventListener('click', (e) => {
-         // モーダルの背景部分をクリックした場合のみ閉じる
-         if (e.target === modal) {
-            closeModal();
-         }
+         // モーダルウィンドウ内のどこをクリックしても閉じる
+         closeModal();
       });
    }
 
@@ -178,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
          e.stopPropagation(); // イベントの伝播を停止
 
          // 確認ダイアログを表示
-         const isConfirmed = confirm('保存していた名言を削除しますか？');
+         const isConfirmed = confirm('保存している名言を削除しますか？');
 
          if (isConfirmed) {
             try {
