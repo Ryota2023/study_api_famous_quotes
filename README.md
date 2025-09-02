@@ -1,16 +1,18 @@
 # study_api_famous_quotes
 
-### 作成日
+## 公開URL
+https://xs278795.xsrv.jp/study_api_famous_quotes/
+## 作成日
 2024/7/10～7/25 
-### 内容
+## 内容
 世界の著名人たちの言葉をランダムに表示するだけのアプリです
-### 作った目的
+## 作った目的
 勉強用としてFecth APIを使ったアプリを一度自分で作ってみたかった。
 Node.jsを使ったプロダクトを公開する予定のため、その前に、Node.js環境下でこの作品を作り、デプロイまでを予行演習として行いたかった。
-### 大変だったこと
+## 大変だったこと
 ～ APIについて　～
 - 今回使ったAPIはAPI keyが発行されなかっただったからか、try～catchの型をイメージすると、思ってたほど難しくはなかった。
-#### 作品が完成したあとのほうが大変だった。
+### 作品が完成したあとのほうが大変だった。
 ～ 本番環境での作業にて ～
 - サーバーのGLIBCのVerの関係でプロダクトのNode.jsのVer（最新バージョン）を受け付けないという謎の課題に直面。
 `Node.jsのバージョンをv20.11.1からv18.17.0に変更`した。開発環境下ではプログラムは問題なく動いた。
@@ -18,7 +20,7 @@ Node.jsを使ったプロダクトを公開する予定のため、その前に�
 - サーバーのpublicディレクトリには通常、Node.jsで作ったアプリは配置しないとのことで、その為に何をすべきかについての設定にかなり時間がかかった。
 - 次に起こった問題は、開発の時にはうまくいっていたfetch処理が、本番環境下ではうまくいかなかった。原因が数日間わからずかなりやられた。結局エンドポイントの問題であることが分かった。それは確かにそうだ、開発の時は同じディレクトリ内でHTTPのreq,resは完結するが、実際はユーザーのブラウザからインターネット経由でエンドポイントにHTTP送信されなければいけないので、そのイメージができてなかった。
 
-### 作ってみた感想
+## 作ってみた感想
 ～ Fetch APIについて ～
 - まずはAPI処理のための型を覚えようと思った。
 
@@ -51,10 +53,12 @@ Node.jsを使ったプロダクトを公開する予定のため、その前に�
 -  {
 		date: '2024/7/24～7/25',
 		content: '検索ボタンを押してないのに勝手にエラーメッセージがコンソール出力されるという現象が続いた。
+
+```
 		Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
-
-		Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
-
+```
 		時間の経過で何度も発生し続ける。
-		コードのエラーかとビビっていたが、どうもGoogle Chromeの拡張機能が関係してるらしいという事を知った。試しに怪しそうだったAvira Browser Safetyをオフにするとエラーメッセージが発生しなくなった。これがエラーメッセージの原因だったということか。とりあえずホッとした。
+		コードのエラーかとビビっていたが、どうもGoogle Chromeの拡張機能が関係してるらしいという事を知った。
+		試しに怪しそうだったAvira Browser Safetyをオフにするとエラーメッセージが発生しなくなった。
+		これがエラーメッセージの原因だったということか。とりあえずホッとした。
 }
